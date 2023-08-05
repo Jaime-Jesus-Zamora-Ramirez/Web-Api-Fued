@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dente &mdash; Colorlib Website Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./css/peticiones.css">
+</head>
+<body>
+
+    <h2>PETICIONES</h2>
+
+   
+        <div id="taskTable"></div> <!-- Este div mostrará las tareas -->
+        <button class="button" onclick="performRequest('GET')">Mostrar Dentistas</button>
+        <a href="./peticionpost.html"><button class="button" >Registrar doctor</button></a>
+    
+    <script>
+        function performRequest(requestName) {
+          if (requestName === 'GET') {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                  try {
+                    var response = JSON.parse(xhr.responseText);
+                    displayTasks(response); // Llamar a la función para mostrar las tareas
+                  } catch (error) {
+                    console.error("Error al analizar la respuesta JSON:", error);
+                  }
+                } else {
+                  console.error("Error en la solicitud HTTP:", xhr.status, xhr.statusText);
+                }
+              }
+            };
+            xhr.open('GET', './api/api.php', true); // Cambiar la ruta correcta al archivo api.php
+            xhr.send();
+          
+          }
+        }
+        
+        function displayTasks(tasks) {
+            var taskTableDiv = document.getElementById('taskTable');
+            var taskTableHTML = '<h3>PETICION GET:</h3><table>';
+            
+            // Encabezados de la tabla
+            taskTableHTML += '<tr><th>ID</th><th>Titulo</th><th>Descripcion</th><th>imagen_url</th></tr>';
+            
+            tasks.forEach(function(task) {
+                taskTableHTML += '<tr><td>' + task.id_dentista + '</td><td>' + task.titulo + '</td><td>' + task.descripcion + '</td><td>' + task.imagen_url + '</td></tr>';
+            });
+            
+            taskTableHTML += '</table>';
+            taskTableDiv.innerHTML = taskTableHTML;
+        }
+    </script>
+    </body>
+    
+    </html>
+</body>
+</html>
