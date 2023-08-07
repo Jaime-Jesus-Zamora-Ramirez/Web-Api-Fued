@@ -1,40 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Awesome login form - HTML, CSS </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
   <link rel="stylesheet" href="./style.css">
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<body>
-	<section class="login">
-		<div class="login_box">
-			<div class="left">
-				<div class="top_link"><a href="../index.html"><img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">Return home</a></div>
-				<div class="contact">
-					<form action="">
-						<h3>SIGN IN</h3>
-						<input type="text" placeholder="USERNAME">
-						<input type="password" placeholder="PASSWORD">
-						<button class="submit">LET'S GO</button>
-					</form>
-				</div>
-			</div>
-			<div class="right">
-				<div class="right-text">
-					<h2>LONYX</h2>
-					<h5>A UX BASED CREATIVE AGENCEY</h5>
-				</div>
-				<div class="right-inductor"><img src="https://lh3.googleusercontent.com/fife/ABSRlIoGiXn2r0SBm7bjFHea6iCUOyY0N2SrvhNUT-orJfyGNRSMO2vfqar3R-xs5Z4xbeqYwrEMq2FXKGXm-l_H6QAlwCBk9uceKBfG-FjacfftM0WM_aoUC_oxRSXXYspQE3tCMHGvMBlb2K1NAdU6qWv3VAQAPdCo8VwTgdnyWv08CmeZ8hX_6Ty8FzetXYKnfXb0CTEFQOVF4p3R58LksVUd73FU6564OsrJt918LPEwqIPAPQ4dMgiH73sgLXnDndUDCdLSDHMSirr4uUaqbiWQq-X1SNdkh-3jzjhW4keeNt1TgQHSrzW3maYO3ryueQzYoMEhts8MP8HH5gs2NkCar9cr_guunglU7Zqaede4cLFhsCZWBLVHY4cKHgk8SzfH_0Rn3St2AQen9MaiT38L5QXsaq6zFMuGiT8M2Md50eS0JdRTdlWLJApbgAUqI3zltUXce-MaCrDtp_UiI6x3IR4fEZiCo0XDyoAesFjXZg9cIuSsLTiKkSAGzzledJU3crgSHjAIycQN2PH2_dBIa3ibAJLphqq6zLh0qiQn_dHh83ru2y7MgxRU85ithgjdIk3PgplREbW9_PLv5j9juYc1WXFNW9ML80UlTaC9D2rP3i80zESJJY56faKsA5GVCIFiUtc3EewSM_C0bkJSMiobIWiXFz7pMcadgZlweUdjBcjvaepHBe8wou0ZtDM9TKom0hs_nx_AKy0dnXGNWI1qftTjAg=w1920-h979-ft" alt=""></div>
-			</div>
-		</div>
-	</section>
-</body>
-</html>
-<!-- partial -->
+  <div class="login">
+    <div class="login_box">
+      <div class="left">
+        <div class="top_link"><a href="../index.html"><img src="../images/left-arrow-6420.svg" alt="">Regresar</a></div>
+           
+        <div class="contact">
+          <div><h3>Inicia sesión</h3> 
+          <button class="google-login-button" onclick="signInWithGoogle()">
+            <span class="google-icon"></span>
+            Iniciar sesión con Google
+          </button></div>
+          
+         
+        </div>
+      </div>
+      <div class="right">
+        <div class="right-text">
+          <h2>DENTISTA</h2>
+          <h5>Jaime Ramirez</h5>
+        </div>
+        <div class="right-inductor">
+         
+        </div>
+      </div>
+    </div>
+  </div>
   
+  <!-- Agrega los scripts de Firebase directamente como scripts en lugar de módulos -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBHc1CHZz1jdMDT4-QsuGr45bDHuSsD2Ho",
+      authDomain: "dentist-2776c.firebaseapp.com",
+      projectId: "dentist-2776c",
+      storageBucket: "dentist-2776c.appspot.com",
+      messagingSenderId: "501499674120",
+      appId: "1:501499674120:web:09613e68e9d2a47b259bbd",
+      measurementId: "G-85PTV3Q7S2"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    function signInWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+          const user = result.user;
+          console.log("Inicio de sesión exitoso:", user);
+          window.location.href = "../peticiones.html";
+        })
+        .catch((error) => {
+          console.error("Error en inicio de sesión:", error);
+        });
+    }
+  </script>
 </body>
 </html>
