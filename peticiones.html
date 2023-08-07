@@ -3,7 +3,7 @@
 <head>
     <title>Dente &mdash; Colorlib Website Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./css/peticiones.css">
+    <link rel="stylesheet" href="./css/peticiones.css"> <!------------Archvio css---------------------->
     <style>
         .delete-button {
             background-color: #ff4b4b;
@@ -18,13 +18,14 @@
 <body>
 
     <h2>PETICIONES</h2>
-
-    <div id="taskTable"></div> <!-- Este div mostrará las tareas -->
+<!------------------------------------------Mostrara las diferentes peticiones----------------------------->
+    <div id="taskTable"></div>
     <button class="button" onclick="performRequest('GET')">Mostrar Dentistas</button>
     <a href="./peticionpost.html"><button class="button" >Registrar Dentista</button></a>
     <a href="./peticionput.html"><button class="button">Editar Dentista</button></a>
     
     <script>
+//---------------------------------------------Peticion GET---------------------------//
         function performRequest(requestName) {
             if (requestName === 'GET') {
                 var xhr = new XMLHttpRequest();
@@ -42,11 +43,13 @@
                         }
                     }
                 };
-                xhr.open('GET', './api/api.php', true); // Cambiar la ruta correcta al archivo api.php
+                xhr.open('GET', './api/api.php', true); // Cambiar la ruta del archivo api.php
                 xhr.send();
             }
         }
-        
+//---------------------------------------------Fin---------------------------//
+
+//---------------------------------------------Mostrar en tabla---------------------------//
         function displayTasks(tasks) {
             var taskTableDiv = document.getElementById('taskTable');
             var taskTableHTML = '<h3></h3><table>';
@@ -68,7 +71,9 @@
             taskTableHTML += '</table>';
             taskTableDiv.innerHTML = taskTableHTML;
         }
+//---------------------------------------------Fin---------------------------//
 
+ //---------------------------------------------Mostrar Delete---------------------------//
         function deleteTask(taskId) {
           var confirmDelete = confirm("¿Estás seguro de que deseas eliminar esta tarea?");
           if (confirmDelete) {
@@ -79,8 +84,6 @@
                           try {
                               var data = JSON.parse(xhr.responseText);
                               console.log('Respuesta del servidor:', data);
-                              // Aquí podrías volver a cargar la lista de tareas para reflejar los cambios
-                              // por ejemplo, llamando nuevamente a performRequest('GET');
                           } catch (error) {
                               console.error("Error al analizar la respuesta JSON:", error);
                           }
@@ -94,7 +97,7 @@
               xhr.send();
           }
       }
-      
+//---------------------------------------------Fin---------------------------//
     </script>
 </body>
 </html>

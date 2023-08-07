@@ -3,9 +3,10 @@
 <head>
     <title>Actualizar Dentista</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./css/peticionpost.css">
+    <link rel="stylesheet" href="./css/peticionpost.css"><!------------Archvio css---------------------->
 </head>
 <body>
+    <!------------------------------------------ Formulario----------------------------->
     <h3>Actualizar Dentista</h3>
     <form id="dentistForm">
         <label for="id_dentista">ID del Dentista:</label><br>
@@ -22,9 +23,11 @@
         
         <button type="button" class="create-button" onclick="submitPut()">Actualizar</button>
         <a href="./peticiones.html"><button type="button" class="cancel-button">Cancelar</button></a>
+        <!------------------------------------------ Final----------------------------->
     </form>
     
     <script>
+    //---------------------------------------------Peticion PUT---------------------------//
         function submitPut() {
             var idDentista = document.getElementById('id_dentista').value;
             var titulo = document.getElementById('titulo').value;
@@ -71,6 +74,7 @@
             document.getElementById('descripcion').value = '';
             document.getElementById('imagen').value = '';
         }
+        //---------------------------------------------Final---------------------------//
     </script>
 </body>
 </html>

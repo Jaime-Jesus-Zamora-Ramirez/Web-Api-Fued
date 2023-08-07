@@ -1,7 +1,7 @@
 <?php
 // api.php
 
-include('../conexion/conexion.php'); // Incluir el archivo de conexión
+include('../conexion/conexion.php'); // conexicon a la bae de datos
 
 //----------------------METODO GET INICIO-------------------------//
 
@@ -94,8 +94,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $titulo = $putData['titulo']; // Obtén el nuevo título del dentista
     $descripcion = $putData['descripcion']; // Obtén la nueva descripción del dentista
     
-    // Realiza la lógica para actualizar la tarea con el ID proporcionado
-    // Por ejemplo:
     $stmt = $conn->prepare("UPDATE dentistas SET titulo = ?, descripcion = ? WHERE id_dentista = ?");
     $stmt->bind_param("ssi", $titulo, $descripcion, $id);
     

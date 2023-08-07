@@ -3,9 +3,10 @@
 <head>
     <title>Crear Nuevo Post</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./css/peticionpost.css">
+    <link rel="stylesheet" href="./css/peticionpost.css"><!------------Archvio css---------------------->
 </head>
 <body>
+    <!------------------------------------------ Formulario----------------------------->
     <h3>Registrar un nuevo dentista</h3>
     <form>
         <label for="titulo">Titulo:</label><br>
@@ -19,9 +20,11 @@
         
         <button type="button" class="create-button" onclick="submitPost()">Crear</button>
         <a href="./peticiones.html"><button type="button" class="cancel-button">Cancelar</button></a>
+        <!------------------------------------------ Final----------------------------->
     </form>
     
     <script>
+        //---------------------------------------------Peticion POST---------------------------//
         function submitPost() {
             var titulo = document.getElementById('titulo').value;
             var descripcion = document.getElementById('descripcion').value;
@@ -51,7 +54,7 @@
                 }
             };            
             
-            xhr.open('POST', './api/api.php', true);
+            xhr.open('POST', './api/api.php', true);// Cambiar la ruta del archivo api.php
             xhr.send(formData);
         }
 
@@ -60,6 +63,7 @@
             document.getElementById('descripcion').value = '';
             document.getElementById('imagen').value = '';
         }
+        //---------------------------------------------Final---------------------------//
     </script>
 </body>
 </html>

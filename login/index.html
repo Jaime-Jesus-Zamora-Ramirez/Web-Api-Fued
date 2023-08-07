@@ -11,16 +11,13 @@
   <div class="login">
     <div class="login_box">
       <div class="left">
-        <div class="top_link"><a href="../index.html"><img src="../images/left-arrow-6420.svg" alt="">Regresar</a></div>
-           
+        <div class="top_link"><a href="../index.html"><img src="../images/left-arrow-6420.svg" alt="">Regresar</a></div>       
         <div class="contact">
           <div><h3>Inicia sesión</h3> 
           <button class="google-login-button" onclick="signInWithGoogle()">
             <span class="google-icon"></span>
             Iniciar sesión con Google
-          </button></div>
-          
-         
+          </button></div>      
         </div>
       </div>
       <div class="right">
@@ -28,17 +25,17 @@
           <h2>DENTISTA</h2>
           <h5>Jaime Ramirez</h5>
         </div>
-        <div class="right-inductor">
-         
+        <div class="right-inductor">      
         </div>
       </div>
     </div>
   </div>
   
-  <!-- Agrega los scripts de Firebase directamente como scripts en lugar de módulos -->
+  <!-- Scripts de Firebase directamente como scripts -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script>
+    //datos desde firebae unicos para cada proyecto
     const firebaseConfig = {
       apiKey: "AIzaSyBHc1CHZz1jdMDT4-QsuGr45bDHuSsD2Ho",
       authDomain: "dentist-2776c.firebaseapp.com",
@@ -57,7 +54,7 @@
         .then((result) => {
           const user = result.user;
           console.log("Inicio de sesión exitoso:", user);
-          window.location.href = "../peticiones.html";
+          window.location.href = "../peticiones.html"; //redireccion hacia peticiones.html
         })
         .catch((error) => {
           console.error("Error en inicio de sesión:", error);
