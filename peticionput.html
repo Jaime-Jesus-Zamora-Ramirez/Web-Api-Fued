@@ -18,8 +18,8 @@
         <label for="descripcion">Descripcion:</label><br>
         <textarea id="descripcion" name="descripcion"></textarea><br><br>
         
-        <label for="imagen">Adjuntar Imagen:</label><br>
-        <input type="file" id="imagen" name="imagen"><br><br>
+        <label for="correo_electronico">Correo Electronico:</label><br>
+        <textarea id="correo_electronico" name="correo_electronico"></textarea><br><br>
         
         <button type="button" class="create-button" onclick="submitPut()">Actualizar</button>
         <a href="./peticiones.html"><button type="button" class="cancel-button">Cancelar</button></a>
@@ -28,52 +28,45 @@
     
     <script>
     //---------------------------------------------Peticion PUT---------------------------//
-        function submitPut() {
-            var idDentista = document.getElementById('id_dentista').value;
-            var titulo = document.getElementById('titulo').value;
-            var descripcion = document.getElementById('descripcion').value;
-            var imagenInput = document.getElementById('imagen');
-            var imagen = imagenInput.files[0];
-
-            var formData = new FormData();
-            formData.append('id_dentista', idDentista); // Agregamos el ID del dentista
-            formData.append('titulo', titulo);
-            formData.append('descripcion', descripcion);
-            formData.append('imagen', imagen);
-
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        try {
-                            var data = JSON.parse(xhr.responseText);
-                            console.log('Respuesta del servidor:', data);
-                            alert('Actualizacion exitosa');
-                            clearForm();
-                        } catch (error) {
-                            console.error("Error al analizar la respuesta JSON:", error);
-                        }
-                    }                        
+    function submitPut() {
+        var id = document.getElementById('id_dentista').value;
+        var titulo = document.getElementById('titulo').value;
+        var descripcion = document.getElementById('descripcion').value;
+        var correo_electronico = document.getElementById('correo_electronico').value;
+    
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                        console.log('Respuesta del servidor:', data);
+                        alert('Actualizacion exitosa');
+                        clearForm();
+                    } catch (error) {
+                        console.error("Error al analizar la respuesta JSON:", error);
+                    }
                 }
-            };
-            
-            xhr.open('PUT', './api/api.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/json'); // Establecer encabezado para indicar que estás enviando JSON
-            xhr.send(JSON.stringify({
-                id_dentista: idDentista,
-                titulo: titulo,
-                descripcion: descripcion,
-                // Otros datos
-            }));
-            
-        }
-
-        function clearForm() {
-            document.getElementById('id_dentista').value = '';
-            document.getElementById('titulo').value = '';
-            document.getElementById('descripcion').value = '';
-            document.getElementById('imagen').value = '';
-        }
+            }
+        };
+    
+        xhr.open('PUT', './api/api.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            id_dentista: id,
+            titulo: titulo,
+            descripcion: descripcion,
+            correo_electronico: correo_electronico,
+        }));
+    }
+    
+    function clearForm() {
+        document.getElementById('id_dentista').value = '';
+        document.getElementById('titulo').value = '';
+        document.getElementById('descripcion').value = '';
+        document.getElementById('correo_electronico').value = '';
+    }
+    
         //---------------------------------------------Final---------------------------//
     </script>
 </body>

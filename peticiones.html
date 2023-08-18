@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,9 @@
     <button class="button" onclick="performRequest('GET')">Mostrar Dentistas</button>
     <a href="./peticionpost.html"><button class="button" >Registrar Dentista</button></a>
     <a href="./peticionput.html"><button class="button">Editar Dentista</button></a>
-    
+    <button class="button" onclick="OptionsRequest()">Options Request</button>
+    <button  class="button" onclick="performHeadRequest()" >Head Request</button>
+    <a href="./peticionreport.html"><button class="button" >Report Request</button></a>
     <script>
 //---------------------------------------------Peticion GET---------------------------//
         function performRequest(requestName) {
@@ -34,7 +37,7 @@
                         if (xhr.status === 200) {
                             try {
                                 var response = JSON.parse(xhr.responseText);
-                                displayTasks(response); // Llamar a la función para mostrar las tareas
+                                displayTasks(response); 
                             } catch (error) {
                                 console.error("Error al analizar la respuesta JSON:", error);
                             }
@@ -43,61 +46,102 @@
                         }
                     }
                 };
-                xhr.open('GET', './api/api.php', true); // Cambiar la ruta del archivo api.php
+                xhr.open('GET', './api/api.php', true); 
                 xhr.send();
             }
         }
 //---------------------------------------------Fin---------------------------//
 
 //---------------------------------------------Mostrar en tabla---------------------------//
-        function displayTasks(tasks) {
-            var taskTableDiv = document.getElementById('taskTable');
-            var taskTableHTML = '<h3></h3><table>';
-            
-            // Encabezados de la tabla
-            taskTableHTML += '<tr><th>ID</th><th>Titulo</th><th>Descripcion</th><th>imagen_url</th><th>Eliminar</th></tr>';
-            
-            tasks.forEach(function(task) {
-                taskTableHTML += `
-                    <tr>
-                        <td>${task.id_dentista}</td>
-                        <td>${task.titulo}</td>
-                        <td>${task.descripcion}</td>
-                        <td>${task.imagen_url}</td>
-                        <td><button class="delete-button" onclick="deleteTask(${task.id_dentista})">Eliminar</button></td>
-                    </tr>`;
-            });
-            
-            taskTableHTML += '</table>';
-            taskTableDiv.innerHTML = taskTableHTML;
-        }
+function displayTasks(tasks) {
+    var taskTableDiv = document.getElementById('taskTable');
+    var taskTableHTML = '<h3></h3><table id="taskTable" class="task-table">';
+
+    // Encabezados de la tabla
+    taskTableHTML += '<tr><th>ID</th><th>Titulo</th><th>Descripcion</th><th>correo_electronico</th><th>Eliminar</th></tr>';
+
+    tasks.forEach(function(task) {
+        taskTableHTML += `
+            <tr>
+                <td>${task.id_dentista}</td>
+                <td>${task.titulo}</td>
+                <td>${task.descripcion}</td>
+                <td>${task.correo_electronico}</td>
+                <td><button class="delete-button" onclick="deleteTask(${task.id_dentista})">Eliminar</button></td>
+            </tr>`;
+    });
+
+    taskTableHTML += '</table>';
+    taskTableDiv.innerHTML = taskTableHTML;
+}
 //---------------------------------------------Fin---------------------------//
 
- //---------------------------------------------Mostrar Delete---------------------------//
-        function deleteTask(taskId) {
-          var confirmDelete = confirm("¿Estás seguro de que deseas eliminar esta tarea?");
-          if (confirmDelete) {
-              var xhr = new XMLHttpRequest();
-              xhr.onreadystatechange = function() {
-                  if (xhr.readyState === 4) {
-                      if (xhr.status === 200) {
-                          try {
-                              var data = JSON.parse(xhr.responseText);
-                              console.log('Respuesta del servidor:', data);
-                          } catch (error) {
-                              console.error("Error al analizar la respuesta JSON:", error);
-                          }
-                      } else {
-                          console.error("Error en la solicitud HTTP:", xhr.status, xhr.statusText);
-                      }
-                  }
-              };
-              
-              xhr.open('DELETE', `./api/api.php?id=${taskId}`, true);
-              xhr.send();
-          }
-      }
+ //--------------------------------------------- Delete---------------------------//
+ function deleteTask(taskId) {
+    var confirmDelete = confirm("¿Quieres eliminar este elemento?");
+    if (confirmDelete) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                        if (data.success) {
+                            console.log('Tarea eliminada exitosamente');
+                        } else {
+                            console.error('Error al eliminar tarea:', data.error);
+                        }
+                    } catch (error) {
+                        console.error("Error al analizar la respuesta JSON:", error);
+                    }
+                } else {
+                    console.error("Error en la solicitud HTTP:", xhr.status, xhr.statusText);
+                }
+            }
+        };
+
+        xhr.open('DELETE', `./api/api.php?id=${taskId}`, true);
+        xhr.send();
+    }
+}
 //---------------------------------------------Fin---------------------------//
+        function OptionsRequest() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log("Solicitud OPTIONS exitosa");
+                    } else {
+                        console.error("Error en la solicitud OPTIONS:", xhr.status, xhr.statusText);
+                    }
+                }
+            };
+            xhr.open('OPTIONS', './api/api.php', true);
+            xhr.send();
+        }
+
+        function performHeadRequest() {
+
+            var xhr = new XMLHttpRequest();
+        
+
+            xhr.open('HEAD', './api/api.php', true); 
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+            
+                        var responseHeaders = xhr.getAllResponseHeaders();
+                        alert('Encabezados de respuesta:\n' + responseHeaders);
+                    } else {
+                        alert('Error en la solicitud HEAD');
+                    }
+                }
+            };
+        
+            xhr.send();
+        }
+
     </script>
+    
 </body>
 </html>

@@ -35,7 +35,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script>
-    //datos desde firebae unicos para cada proyecto
+    
     const firebaseConfig = {
       apiKey: "AIzaSyBHc1CHZz1jdMDT4-QsuGr45bDHuSsD2Ho",
       authDomain: "dentist-2776c.firebaseapp.com",
@@ -54,7 +54,7 @@
         .then((result) => {
           const user = result.user;
           console.log("Inicio de sesión exitoso:", user);
-          window.location.href = "../peticiones.html"; //redireccion hacia peticiones.html
+          window.location.href = "../peticiones.php"; 
         })
         .catch((error) => {
           console.error("Error en inicio de sesión:", error);

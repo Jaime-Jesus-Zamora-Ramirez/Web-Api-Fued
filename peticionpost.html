@@ -3,67 +3,74 @@
 <head>
     <title>Crear Nuevo Post</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./css/peticionpost.css"><!------------Archvio css---------------------->
+    <link rel="stylesheet" href="./css/peticionpost.css"><!-- Archivo CSS -->
 </head>
 <body>
-    <!------------------------------------------ Formulario----------------------------->
+    <!-- Formulario -->
     <h3>Registrar un nuevo dentista</h3>
-    <form>
+    <form id="dentistForm">
         <label for="titulo">Titulo:</label><br>
         <input type="text" id="titulo" name="titulo"><br><br>
         
         <label for="descripcion">Descripcion:</label><br>
         <textarea id="descripcion" name="descripcion"></textarea><br><br>
-        
-        <label for="imagen">Adjuntar Imagen:</label><br>
-        <input type="file" id="imagen" name="imagen"><br><br>
+
+        <label for="correo_electronico">Correo Electronico:</label><br>
+        <textarea id="correo_electronico" name="correo_electronico"></textarea><br><br>
+
         
         <button type="button" class="create-button" onclick="submitPost()">Crear</button>
         <a href="./peticiones.html"><button type="button" class="cancel-button">Cancelar</button></a>
-        <!------------------------------------------ Final----------------------------->
     </form>
     
     <script>
-        //---------------------------------------------Peticion POST---------------------------//
+        // Peticion POST
         function submitPost() {
             var titulo = document.getElementById('titulo').value;
             var descripcion = document.getElementById('descripcion').value;
-            var imagenInput = document.getElementById('imagen');
-            var imagen = imagenInput.files[0]; // Obtenemos el archivo seleccionado
-
-            var formData = new FormData(); // Creamos un objeto FormData para enviar los datos
-            formData.append('titulo', titulo);
-            formData.append('descripcion', descripcion);
-            formData.append('imagen', imagen);
-
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        try {
-                            var data = JSON.parse(xhr.responseText);
-                            console.log('Respuesta del servidor:', data);
-                            alert('Actualización exitosa');
-                            clearForm();
-                        } catch (error) {
-                            console.error("Error al analizar la respuesta JSON:", error);
+            var correo_electronico = document.getElementById('correo_electronico').value;
+        
+            // Verificar si los campos no están vacíos
+            if (titulo && descripcion && correo_electronico) {
+                var data = {
+                    titulo: titulo,
+                    descripcion: descripcion,
+                    correo_electronico: correo_electronico
+                };
+        
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            try {
+                                var response = JSON.parse(xhr.responseText);
+                                console.log('Respuesta del servidor:', response);
+                                alert('Registro exitoso');
+                                clearForm();
+                            } catch (error) {
+                                console.error("Error al analizar la respuesta JSON:", error);
+                            }
                         }
-                    } else {
-                        console.error("Error en la solicitud HTTP:", xhr.status, xhr.statusText);
                     }
-                }
-            };            
-            
-            xhr.open('POST', './api/api.php', true);// Cambiar la ruta del archivo api.php
-            xhr.send(formData);
+                };
+        
+                xhr.open('POST', './api/api.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify(data));
+            } else {
+                console.error("Campos incompletos");
+            }
         }
-
+        
         function clearForm() {
             document.getElementById('titulo').value = '';
             document.getElementById('descripcion').value = '';
-            document.getElementById('imagen').value = '';
+            document.getElementById('correo_electronico').value = '';
         }
-        //---------------------------------------------Final---------------------------//
-    </script>
+        
+            //---------------------------------------------Final---------------------------//
+        </script>
 </body>
 </html>
+
+

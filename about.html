@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="./css/about.css">
+    
     
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
   
@@ -122,75 +122,51 @@
         </div>
       </div>
     </div>  
-                  <!---------------------------------------------INICIO---------------------------------->
-                  <div class="site-section section-about">
-                    <div class="container">
-                        <div class="row mb-5 justify-content-center">
-                            <div class="col-md-6 text-center">
-                                <h2 class="site-heading text-black mb-5">Un Equipo de <strong>Dentistas Dedicados</strong></h2>
-                            </div>
-                        </div>
-                        <div class="row" id="taskCardContainer">
-                            <!-- Las tarjetas generadas por JavaScript se mostrarán aquí -->
-                        </div>
-                    </div>
-                </div>
-            
-                <script>
-                    function performRequest(requestName) {
-                        if (requestName === 'GET') {
-                            var xhr = new XMLHttpRequest();
-                            xhr.onreadystatechange = function() {
-                                if (xhr.readyState === 4) {
-                                    if (xhr.status === 200) {
-                                        try {
-                                            var response = JSON.parse(xhr.responseText);
-                                            displayTasks(response); // Llamar a la función para mostrar las tarjetas
-                                        } catch (error) {
-                                            console.error("Error al analizar la respuesta JSON:", error);
-                                        }
-                                    } else {
-                                        console.error("Error en la solicitud HTTP:", xhr.status, xhr.statusText);
-                                    }
-                                }
-                            };
-                            xhr.open('GET', './api/api.php', true); // Cambiar la ruta correcta al archivo api.php
-                            xhr.send();
-                        }
-                    }
-            
-                    function displayTasks(tasks) {
-                        var taskCardContainer = document.getElementById('taskCardContainer');
-                        var taskCardsHTML = '';
-            
-                        tasks.forEach(function(task) {
-                            taskCardsHTML += `
-                            <div class="col-md-6 centered-card">
-                                <div class="dentist-card">
-                                    <!-- Modificamos la ruta de la imagen para que sea relativa -->
-                                    <img src="./images/${task.imagen_url}" alt="Image" class="w-50 mb-3" style="border-radius: 10px;">
-                                    <h3>${task.titulo}</h3>
-                                    <p class="lead">${task.descripcion}</p>
-                                    <p class="mt-3">
-                                        <a href="#" class="py-2 pl-0 pr-2"><span class="icon-facebook"></span></a>
-                                        <a href="#" class="py-2 pl-2 pr-2"><span class="icon-twitter"></span></a>
-                                        <a href="#" class="py-2 pl-2 pr-2"><span class="icon-instagram"></span></a>
-                                        <a href="#" class="py-2 pl-2 pr-2"><span class="icon-linkedin"></span></a>
-                                        <a href="#" class="py-2 pl-2 pr-2"><span class="icon-heart"></span></a>
-                                    </p>
-                                </div>
-                            </div>            
-                            `;
-                        });
-            
-                        taskCardContainer.innerHTML = taskCardsHTML;
-                    }
-            
-                    // Llamar a la función para realizar la petición GET y generar las tarjetas
-                    performRequest('GET');
-                </script>
-  
-            <!---------------------------------------------FINAL---------------------------------->
+
+    <div class="site-section section-about">
+      <div class="container">
+        <div class="row mb-5 justify-content-center">
+          <div class="col-md-6 text-center">
+            <h2 class="site-heading text-black mb-5">A Team of <strong>Dedicated Dentist</strong></h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 pr-md-5 text-left mb-5">
+            <div>
+              <img src="images/person_1.jpg" alt="Image" class="w-50 mb-5 rounded-circle">
+              <h3>Dr. Emily Sy</h3>
+              <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus doloremque totam repudiandae dolor dolores tenetur, porro unde cumque ullam quaerat quo officia. Autem ea, a vel quibusdam provident deserunt placeat.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus doloremque totam repudiandae dolor dolores tenetur, porro unde cumque ullam quaerat quo officia. Autem ea, a vel quibusdam provident deserunt placeat.</p>
+
+              <p class="mt-5">
+                <a href="#" class="py-4 pl-0 pr-2"><span class="icon-facebook"></span></a>
+                <a href="#" class="py-4 pl-2 pr-2"><span class="icon-twitter"></span></a>
+                <a href="#" class="py-4 pl-2 pr-2"><span class="icon-instagram"></span></a>
+                <a href="#" class="py-4 pl-2 pr-2"><span class="icon-linkedin"></span></a>
+                <a href="#" class="py-4 pl-2 pr-2"><span class="icon-heart"></span></a>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 pl-md-5 text-left">
+            <div>
+              <img src="images/person_3.jpg" alt="Image" class="w-50 mb-5 rounded-circle">
+              <h3>Dr. Vincent Uen</h3>
+              <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus doloremque totam repudiandae dolor dolores tenetur, porro unde cumque ullam quaerat quo officia. Autem ea, a vel quibusdam provident deserunt placeat.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus doloremque totam repudiandae dolor dolores tenetur, porro unde cumque ullam quaerat quo officia. Autem ea, a vel quibusdam provident deserunt placeat.</p>
+
+              <p class="mt-5">
+                <a href="#" class="py-4 pl-0 pr-2"><span class="icon-facebook"></span></a>
+                <a href="#" class="py-4 pl-2 pr-2"><span class="icon-twitter"></span></a>
+                <a href="#" class="py-4 pl-2 pr-2"><span class="icon-instagram"></span></a>
+                <a href="#" class="py-4 pl-2 pr-2"><span class="icon-linkedin"></span></a>
+                <a href="#" class="py-4 pl-2 pr-2"><span class="icon-heart"></span></a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="site-section bg-light">
       <div class="container">
         <div class="row mb-5 justify-content-center">
