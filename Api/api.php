@@ -2,7 +2,7 @@
 
 include('../conexion/conexion.php');
 header("Access-Control-Allow-Origin: http://localhost/dentist/api/api.php");
-header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS, DELETE, HEAD, REPORT");
+header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS, DELETE, HEAD, REPORT,PATH");
 header("Access-Control-Allow-Headers: Content-Type");
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -168,6 +168,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'REPORT') {
     // Enviar el informe como respuesta
     header('Content-Type: application/json');
     echo json_encode($report);
-}
+}elseif ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
+    $json_input = file_get_contents('php://input');
+    $data = json_decode($json_input, true);
 
+    $id = isset($data['id']) ? $data['id'] : '';
+
+    if (empty($id)) {
+        $response = ['error' => 'ID no proporcionado'];
+    } else {
+        $setStatements = array();
+        $paramValues = array();
+
+        if (isset($data['titulo'])) {
+            $setStatements[] = 'titulo = ?';
+            $paramValues[] = $data['titulo'];
+        }
+        if (isset($data['descripcion'])) {
+            $setStatements[] = 'descripcion = ?';
+            $paramValues[] = $data['descripcion'];
+        }
+        if (isset($data['correo_electronico'])) {
+            $setStatements[] = 'correo_electronico = ?';
+            $paramValues[] = $data['correo_electronico'];
+        }
+        
+        if (empty($setStatements)) {
+            $response = ['error' => 'Ningún campo para actualizar proporcionado'];
+        } else {
+            $setClause = implode(', ', $setStatements);
+
+            $paramValues[] = $id;
+
+            $query = "UPDATE dentistas SET $setClause WHERE id_dentista = ?";
+            $stmt = $conn->prepare($query);
+
+            $paramTypes = str_repeat('s', count($paramValues)); // Assuming all values are strings
+            
+            $bindParams = array($paramTypes);
+            foreach ($paramValues as &$paramValue) {
+                $bindParams[] = &$paramValue;
+            }
+
+            call_user_func_array(array($stmt, 'bind_param'), $bindParams);
+
+            if ($stmt->execute()) {
+                $response = ['message' => 'Datos actualizados en la base'];
+            } else {
+                $response = ['error' => 'Error al actualizar los datos en la base de datos: ' . $stmt->error];
+            }
+        }
+    }
+    
+    header('Content-Type: application/json');
+    echo json_encode($response); // Asegúrate de que esta línea devuelva una respuesta JSON válida
+}
 ?>

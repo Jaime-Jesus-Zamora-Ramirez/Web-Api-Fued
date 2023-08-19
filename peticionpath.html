@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Actualizar Campo de Dentista</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./css/peticionpost.css"><!-- Archivo CSS -->
+</head>
+
+<body>
+    <!-- Formulario -->
+    <h3>PATH</h3>
+    <form id="dentistForm">
+        <label for="dentistId">ID del Dentista:</label><br>
+        <input type="text" id="dentistId" name="dentistId"><br><br>
+        
+        <label for="campo">Campo a Actualizar:</label><br>
+        <select id="campo" name="campo">
+            <option value="titulo">Titulo</option>
+            <option value="descripcion">Descripcion</option>
+            <option value="correo_electronico">Correo Electronico</option>
+        </select><br><br>
+        
+        <label for="nuevoValor">Nuevo Valor:</label><br>
+        <input type="text" id="nuevoValor" name="nuevoValor"><br><br>
+
+        <button type="button" class="create-button" onclick="submitPatch()">Actualizar</button>
+        <a href="./peticiones.html"><button type="button" class="cancel-button">Regresar</button></a>
+    </form>
+    
+    <script>
+       // Peticion PATCH
+function submitPatch() {
+    var selectedDentistId = document.getElementById('dentistId').value;
+    var selectedCampo = document.getElementById('campo').value;
+    var nuevoValor = document.getElementById('nuevoValor').value;
+
+    // Verificar si los campos no están vacíos y se ha proporcionado un ID
+    if (selectedDentistId && selectedCampo && nuevoValor) {
+        var data = {
+            id: selectedDentistId,
+        };
+        data[selectedCampo] = nuevoValor;
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+                        console.log('Respuesta del servidor:', response);
+                        alert('Actualización exitosa');
+                        clearForm();
+                    } catch (error) {
+                        console.error("Error al analizar la respuesta JSON:", error);
+                    }
+                } else {
+                    console.log('Respuesta del servidor:', xhr.responseText);
+                }
+            }
+        };
+
+        xhr.open('PATCH', './api/api.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify(data));
+    } else {
+        console.error("Campos incompletos");
+    }
+}
+
+function clearForm() {
+    document.getElementById('campo').value = '';
+    document.getElementById('nuevoValor').value = '';
+}
+    </script>
+</body>
+</html>

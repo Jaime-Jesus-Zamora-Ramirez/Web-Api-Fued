@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="./css/peticionpost.css"><!-- Archivo CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Report Request</title>
 </head>
 <H1>REPORT</H1>
 <body>
-    <form id="reportForm">
+    <form  id="dentistForm">
         <label for="reportId">ID del reporte:</label>
-        <input type="text" id="reportId" name="reportId">
-        <button type="button" onclick="reportRequest()">Obtener Reporte</button>
-        <a  href="./peticiones.html" ><button type="button">Regresar</button></a>
+        <input type="text" id="reportId" name="reportId">  
+        <p></p><button type="button"class="create-button" onclick="reportRequest()">Obtener Reporte</button>
+        <a  href="./peticiones.html" ><button class="cancel-button" type="button">Regresar</button></a></p>
     </form>
-    
-    <div id="reportContainer"></div>
-
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <div id="reportContainer"></div>
+            </div>
+        </div>
     <script>
         function reportRequest() {
             var xhr = new XMLHttpRequest();

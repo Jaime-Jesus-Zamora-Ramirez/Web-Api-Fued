@@ -4,29 +4,114 @@
 <head>
     <title>Dente &mdash; Colorlib Website Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="./css/peticiones.css"> <!------------Archvio css---------------------->
     <style>
-        .delete-button {
-            background-color: #ff4b4b;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            padding: 5px 10px;
-            cursor: pointer;
+        .titulo-1 {
+            background-color: green; /* Color de fondo verde */
+            color: white; /* Color del texto */
+            padding: 5px; /* Espacio alrededor del texto */
+            height: 35px;
         }
     </style>
 </head>
+<div class="titulo-1">
+    <span>PETICIONES</span>
+  </div>
 <body>
+    <!------------------------------------------BTN 1----------------------------->
+ <div id="taskTable"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card" style="margin: 20px; width: 200px;">
+                <img src="./images/get.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Mostrar y Eliminar</h5>
+                    <button class="btn btn-outline-success" onclick="performRequest('GET')">GET</button>
+                </div>
+            </div>
+        </div>
+   <!------------------------------------------BTN 1 FIN----------------------------->
+   <!------------------------------------------BTN 2----------------------------->
+        <div class="col-md-3">
+            <div class="card" style="margin: 20px; width: 200px;">
+                <img src="./images/post.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Registrar</h5>
+                    <a href="./peticionpost.html"><button class="btn btn-outline-success" >POST</button></a>
+                </div>
+            </div>
+        </div>
+    <!------------------------------------------BTN 2 FIN----------------------------->
+    <!------------------------------------------BTN 3----------------------------->
+        <div class="col-md-3">
+            <div class="card" style="margin: 20px; width: 200px;">
+                <img src="./images/put.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Actualizar</h5>
+                    <a href="./peticionput.html"><button class="btn btn-outline-success"">PUT</button></a>
+                </div>
+            </div>
+        </div>
+    <!------------------------------------------BTN 3 FIN----------------------------->
+    <!------------------------------------------BTN 4----------------------------->
+        <div class="col-md-3">
+            <div class="card" style="margin: 20px; width: 200px;">
+                <img src="./images/options.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Opciones</h5>
+                    <button class="btn btn-outline-success" onclick="OptionsRequest()">Options</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------------------------------------------BTN 4 FIN----------------------------->
+    <div class="row">
+        <!------------------------------------------BTN 5----------------------------->
+        <div class="col-md-3 mx-auto">
+            <div class="card" style="margin: 20px; width: 200px;">
+                <img src="./images/head.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Cabezeras</h5>
+                    <button class="btn btn-outline-success" onclick="performHeadRequest()">Head</button>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------------BTN 5 FIN----------------------------->
+        <!------------------------------------------BTN 6----------------------------->
+        <div class="col-md-3 mx-auto">
+            <div class="card" style="margin: 20px; width: 200px;">
+                <img src="./images/login2.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Reporte</h5>
+                    <a href="./peticionreport.html"><button class="btn btn-outline-success">Report</button></a>
+                </div>
+            </div>
+        </div>
+        <!------------------------------------------BTN 6 FIN----------------------------->
+        <!------------------------------------------BTN 7----------------------------->
+        <div class="col-md-3 mx-auto">
+            <div class="card" style="margin: 20px; width: 200px;">
+                <img src="./images/path.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Actualizar Campo</h5>
+                    <a href="./peticionpath.html"><button class="btn btn-outline-success">Path</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!------------------------------------------BTN 7 FIN----------------------------->
 
-    <h2>PETICIONES</h2>
-<!------------------------------------------Mostrara las diferentes peticiones----------------------------->
-    <div id="taskTable"></div>
-    <button class="button" onclick="performRequest('GET')">Mostrar Dentistas</button>
-    <a href="./peticionpost.html"><button class="button" >Registrar Dentista</button></a>
-    <a href="./peticionput.html"><button class="button">Editar Dentista</button></a>
-    <button class="button" onclick="OptionsRequest()">Options Request</button>
-    <button  class="button" onclick="performHeadRequest()" >Head Request</button>
-    <a href="./peticionreport.html"><button class="button" >Report Request</button></a>
     <script>
 //---------------------------------------------Peticion GET---------------------------//
         function performRequest(requestName) {
@@ -55,9 +140,10 @@
 //---------------------------------------------Mostrar en tabla---------------------------//
 function displayTasks(tasks) {
     var taskTableDiv = document.getElementById('taskTable');
-    var taskTableHTML = '<h3></h3><table id="taskTable" class="task-table">';
+    var taskTableHTML = '<p><div class="d-flex justify-content-center"><div class="card" style="max-width: 900px;"><div class="card-body"><h3 class="card-title"></h3><div class="table-responsive">';
+    taskTableHTML += '<table class="table table-striped table-hover">';
 
-    // Encabezados de la tabla
+    // Encabezados de la tabla con clases de Bootstrap
     taskTableHTML += '<tr><th>ID</th><th>Titulo</th><th>Descripcion</th><th>correo_electronico</th><th>Eliminar</th></tr>';
 
     tasks.forEach(function(task) {
@@ -67,18 +153,21 @@ function displayTasks(tasks) {
                 <td>${task.titulo}</td>
                 <td>${task.descripcion}</td>
                 <td>${task.correo_electronico}</td>
-                <td><button class="delete-button" onclick="deleteTask(${task.id_dentista})">Eliminar</button></td>
+                <td><button class="btn btn-danger" onclick="deleteTask(${task.id_dentista})">Eliminar</button></td>
             </tr>`;
     });
 
     taskTableHTML += '</table>';
+    taskTableHTML += '</div></div></div></div>'; // Cerramos los contenedores "table-responsive", "card-body", "card" y "d-flex"
     taskTableDiv.innerHTML = taskTableHTML;
 }
+
+
 //---------------------------------------------Fin---------------------------//
 
  //--------------------------------------------- Delete---------------------------//
  function deleteTask(taskId) {
-    var confirmDelete = confirm("¿Quieres eliminar este elemento?");
+    var confirmDelete = confirm("Quieres eliminar este elemento?");
     if (confirmDelete) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -105,41 +194,55 @@ function displayTasks(tasks) {
     }
 }
 //---------------------------------------------Fin---------------------------//
-        function OptionsRequest() {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        console.log("Solicitud OPTIONS exitosa");
-                    } else {
-                        console.error("Error en la solicitud OPTIONS:", xhr.status, xhr.statusText);
-                    }
-                }
-            };
-            xhr.open('OPTIONS', './api/api.php', true);
-            xhr.send();
+function OptionsRequest() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                console.log("Solicitud OPTIONS exitosa");
+                
+                // Obtener las cabeceras de respuesta como un string
+                var responseHeadersString = xhr.getAllResponseHeaders();
+
+                // Separar el string en líneas y filtrar las cabeceras relevantes
+                var allowedHeaders = responseHeadersString.split('\n')
+                    .filter(line => line.toLowerCase().startsWith('access-control-allow'));
+
+                // Formatear las cabeceras permitidas en un string legible
+                var formattedHeaders = allowedHeaders.join('\n');
+
+                console.log("Cabeceras de respuesta permitidas:\n", formattedHeaders);
+
+                // Mostrar las cabeceras permitidas en una alerta
+                alert("Solicitud OPTIONS exitosa\n\nCabeceras de respuesta permitidas:\n" + formattedHeaders);
+            } else {
+                console.error("Error en la solicitud OPTIONS:", xhr.status, xhr.statusText);
+                alert("Error en la solicitud OPTIONS:\n" + xhr.status + " " + xhr.statusText);
+            }
         }
+    };
+    xhr.open('OPTIONS', './api/api.php', true);
+    xhr.send();
+}
 
-        function performHeadRequest() {
+function performHeadRequest() {
+    var xhr = new XMLHttpRequest();
 
-            var xhr = new XMLHttpRequest();
-        
-
-            xhr.open('HEAD', './api/api.php', true); 
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-            
-                        var responseHeaders = xhr.getAllResponseHeaders();
-                        alert('Encabezados de respuesta:\n' + responseHeaders);
-                    } else {
-                        alert('Error en la solicitud HEAD');
-                    }
-                }
-            };
-        
-            xhr.send();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var responseHeaders = xhr.getAllResponseHeaders();
+                console.log('Encabezados de respuesta:\n' + responseHeaders); // Imprimir en la consola
+                alert('Encabezados de respuesta:\n' + responseHeaders); // Mostrar en una alerta
+            } else {
+                console.log('Error en la solicitud HEAD'); // Imprimir en la consola
+                alert('Error en la solicitud HEAD'); // Mostrar en una alerta
+            }
         }
+    };
+    xhr.open('HEAD', './api/api.php', true);
+    xhr.send();
+}
 
     </script>
     
